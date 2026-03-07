@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Github Issue Tracker</title>
     <!-- css -->
-     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <!-- favicon icon -->
     <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
 
@@ -18,13 +18,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-    
+
     <!-- font awsome -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <h1 class="text-5xl">the project started</h1>
+    <section>
+        <div class="max-w-[520px] mx-auto my-16 shadow-md rounded-xl">
+            <div class="max-w-[456px] mx-auto">
+                <img class="mx-auto mb-6" src="./assets/github-logo.png" alt="">
+            <h2 class="font-semibold text-2xl text-[#000000] text-center mb-1">GitHub Issues Tracker</h2>
+            <p class="text-base text-[#64748B] text-center">Sign in to manage your issues</p>
+            </div>
+
+            <!-- login section -->
+
+            <div class="max-w-[456px] flex-col lg:flex-row-reverse mx-auto">
+                <div class="card bg-base-100 w-full max-w-sm shrink-0">
+                    <div class="card-body">
+                        <fieldset class="fieldset">
+                            <label class="label text-base text-[#000000]">Username</label>
+                            <input id="input-username" type="text" class="input" placeholder="Enter Username" />
+                            <p class="text-[#4A00FF] text-sm">Default: admin</p>
+                            <label class="label text-base text-[#000000] mt-4">Password</label>
+                            <input id="input-pass" type="password" class="input" placeholder="Enter Password" />
+                            <p class="text-[#4A00FF] text-sm">Default: admin123</p>
+                            <button id="signin-btn" class="btn btn-primary mt-6">Sign In</button>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
 
 
 
