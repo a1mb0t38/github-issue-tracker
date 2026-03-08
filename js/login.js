@@ -8,8 +8,8 @@ document.getElementById("signin-btn").addEventListener('click',()=>{
     const pass = inputPass.value;
     console.log(pass);
     if(name == "admin" && pass == "admin123"){
-        // window.location.assign("/main.html");
-        window.location.href = "main.html";
+        window.location.assign("main.html");
+        // window.location.href = "main.html";
     }else{
         alert("incorrect credential");
         return;
