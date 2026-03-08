@@ -53,7 +53,7 @@ const displayCard = (info) => {
     for(let card of info){{
         console.log(card);
         const cards = document.createElement("div");
-        if(card.priority == "high" || card.priority == "medium"){
+        if(card.status == "open"){
             cards.innerHTML = `
             <div class="max-w-[256px] bg-white shadow-md p-4 rounded-md overflow-hidden border-t-4 border-[#00A96E] space-y-2">
             <div class="flex justify-between items-center">
