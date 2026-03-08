@@ -1,9 +1,30 @@
-const totalIssue = document.getElementById("total-issue");
+let allIssues = [];
+
+document.getElementById("all-btn").addEventListener("click",()=>{
+    displayCard(allIssues);
+})
+
+document.getElementById("open-btn").addEventListener("click",()=>{
+    const openCard = allIssues.filter(issue=> issue.status === "open");
+    displayCard(openCard);
+})
+
+document.getElementById("closed-btn").addEventListener("click",()=>{
+    const closedCard = allIssues.filter(issue=> issue.status === "closed");
+    displayCard(closedCard);
+})
+
+
+
+let totalIssue = document.getElementById("total-issue");
 
 const loadcard = () => {
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res) => res.json())
-    .then((json) => displayCard(json.data));
+    .then((json) => {
+        allIssues = json.data;
+        displayCard(allIssues);
+    });
 }
 
 const displayCard = (info) => {
