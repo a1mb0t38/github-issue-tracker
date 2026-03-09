@@ -46,6 +46,20 @@ const loadcard = () => {
     });
 }
 
+const loadIssueDetails= async(id)=>{
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const res = await fetch(url);
+    const details = await res.json();
+    displayIssueDetails(details.data);
+}
+
+const displayIssueDetails=(word)=>{
+    console.log(word);
+    const detailsIssue = document.getElementById("issue-details");
+    // detailsIssue.innerHTML = "Hi i am from js";
+    document.getElementById("issue_modal").showModal();
+}
+
 const displayCard = (info) => {
     // console.log(info);
     const total = info.length;
@@ -70,14 +84,14 @@ const displayCard = (info) => {
     // },
 
     for(let card of info){{
-        console.log(card);
+        // console.log(card);
         const cards = document.createElement("div");
         if(card.status == "open"){
             cards.innerHTML = `
             <div class="max-w-[256px] bg-white shadow-md p-4 rounded-md overflow-hidden border-t-4 border-[#00A96E] space-y-2">
             <div class="flex justify-between items-center">
                 <img class="bg-[#00A96E] rounded-full" src="./assets/Open-Status.png" alt="">
-                <span class="inline-block px-6 py-1 bg-[#FEECEC] text-[#EF4444] rounded-full hover:bg-red-500 hover:text-white transition cursor-pointer">${card.priority}</span>
+                <span onclick="loadIssueDetails(${card.id})" class="inline-block px-6 py-1 bg-[#FEECEC] text-[#EF4444] rounded-full hover:bg-red-500 hover:text-white transition cursor-pointer">${card.priority}</span>
             </div>
             <h2 class="font-semibold text-sm text-black">${card.title}</h2>
             <p class="text-[12px] text-[#64748B]">${card.description}</p>
@@ -95,7 +109,7 @@ const displayCard = (info) => {
             <div class="max-w-[256px] bg-white shadow-md p-4 rounded-md overflow-hidden border-t-4 border-[#A855F7] space-y-2">
             <div class="flex justify-between items-center">
                 <img class="bg-[#00A96E] rounded-full" src="./assets/Closed-Status.png" alt="">
-                <span class="inline-block px-6 py-1 bg-[#EEEFF2] text-[#9CA3AF] rounded-full hover:bg-green-600 hover:text-white transition cursor-pointer">${card.priority}</span>
+                <span onclick="loadIssueDetails(${card.id})" class="inline-block px-6 py-1 bg-[#EEEFF2] text-[#9CA3AF] rounded-full hover:bg-green-600 hover:text-white transition cursor-pointer">${card.priority}</span>
             </div>
             <h2 class="font-semibold text-sm text-black">${card.title}</h2>
             <p class="text-[12px] text-[#64748B]">${card.description}p>
