@@ -1,20 +1,39 @@
 let allIssues = [];
 
 document.getElementById("all-btn").addEventListener("click",()=>{
+    removeActive();
+    const allBtn = document.getElementById("all-btn");
+    allBtn.classList.add("active");
     displayCard(allIssues);
 })
 
 document.getElementById("open-btn").addEventListener("click",()=>{
+    removeActive();
+    const openBtn = document.getElementById("open-btn");
+    openBtn.classList.add("active");
     const openCard = allIssues.filter(issue=> issue.status === "open");
     displayCard(openCard);
 })
 
 document.getElementById("closed-btn").addEventListener("click",()=>{
+    removeActive();
+    const closedBtn = document.getElementById("closed-btn");
+    closedBtn.classList.add("active");
     const closedCard = allIssues.filter(issue=> issue.status === "closed");
     displayCard(closedCard);
 })
 
+const removeActive = () =>{
+    const removeAll = document.getElementById("all-btn");
+    const removeOpen = document.getElementById("open-btn");
+    const removeClosed = document.getElementById("closed-btn");
 
+    removeAll.classList.remove("active");
+    removeOpen.classList.remove("active");
+    removeClosed.classList.remove("active");
+
+    removeAll.classList.remove("btn-primary");
+}
 
 let totalIssue = document.getElementById("total-issue");
 
