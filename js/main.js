@@ -185,3 +185,20 @@ const displayCard = (info) => {
 }
 
 loadcard();
+
+// search fuction
+document.getElementById("btn-search").addEventListener("click",()=>{
+    const input = document.getElementById("input-search");
+    const searchValue = input.value.trim().toLowerCase();
+    console.log(searchValue);
+
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+    .then(res=> res.json())
+    .then(data=> {
+        const words = data.data;
+        console.log(words);
+        const filterWords = words.filter(word=>word.description.toLowerCase().includes(searchValue));
+        displayCard(filterWords)
+    })
+    
+})
