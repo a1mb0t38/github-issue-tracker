@@ -1,3 +1,19 @@
+const createElement = (arr) => {
+    const htmlElement = arr.map((el)=> `<span class="btn bg-[#FECACA]">${el}</span>`);
+    return htmlElement.join(" ");
+}
+
+const manageSpinner = (status) =>{
+    if(status == true){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("card-container").classList.add("hidden");
+
+    }else{
+        document.getElementById("card-container").classList.remove("hidden");
+        document.getElementById("spinner").classList.add("hidden");
+    }
+}
+
 let allIssues = [];
 
 document.getElementById("all-btn").addEventListener("click",()=>{
@@ -13,6 +29,7 @@ document.getElementById("open-btn").addEventListener("click",()=>{
     openBtn.classList.add("active");
     const openCard = allIssues.filter(issue=> issue.status === "open");
     displayCard(openCard);
+    
 })
 
 document.getElementById("closed-btn").addEventListener("click",()=>{
@@ -38,6 +55,7 @@ const removeActive = () =>{
 let totalIssue = document.getElementById("total-issue");
 
 const loadcard = () => {
+    manageSpinner(true)
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res) => res.json())
     .then((json) => {
@@ -53,10 +71,49 @@ const loadIssueDetails= async(id)=>{
     displayIssueDetails(details.data);
 }
 
+// {
+//     "id": 1,
+//     "title": "Fix navigation menu on mobile devices",
+//     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
+//     "status": "open",
+//     "labels": [
+//         "bug",
+//         "help wanted"
+//     ],
+//     "priority": "high",
+//     "author": "john_doe",
+//     "assignee": "jane_smith",
+//     "createdAt": "2024-01-15T10:30:00Z",
+//     "updatedAt": "2024-01-15T10:30:00Z"
+// }
+
 const displayIssueDetails=(word)=>{
-    console.log(word);
+    // console.log(word);
     const detailsIssue = document.getElementById("issue-details");
-    // detailsIssue.innerHTML = "Hi i am from js";
+    detailsIssue.innerHTML = `
+        <div>
+                    <h2 class="font-bold text-2xl text-black mb-2">${word.title}</h2>
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="px-2 py-[6px] bg-[#00A96E] text-white rounded-full hover:cursor-pointer">${word.status}</span>
+                        <span class="inline-block px-[4px] py-[4px] rounded-full bg-gray-400"></span>
+                        <p class="text-[#64748B] text-[12px]">Opened by ${word.assignee}</p>
+                        <span class="inline-block px-[4px] py-[4px] rounded-full bg-gray-400"></span>
+                        <p class="text-[#64748B] text-[12px]">22/02/2026</p>
+                    </div>
+                    <div class="mb-6">
+                        <div>${createElement(word.labels)}</div>
+                    </div>
+                    <p class="m-6 text-base text-[#64748B]">${word.description}</p>
+                    <div class="flex gap-2 justify-evenly items-center max-w-[636px] bg-gray-100 p-4">
+                        <p><span class="text-[#64748B] text-base">Assignee</span>: <span class="text-black font-semibold">${word.assignee}</span></p>
+                        <div>
+                            <span>Priority:</span><br>
+                        <span class="btn bg-[#EF4444] text-white text-[12px] font-medium">${word.priority}</span>
+                        </div>
+                    </div>
+                </div>
+    
+    `
     document.getElementById("issue_modal").showModal();
 }
 
@@ -96,8 +153,7 @@ const displayCard = (info) => {
             <h2 class="font-semibold text-sm text-black">${card.title}</h2>
             <p class="text-[12px] text-[#64748B]">${card.description}</p>
             <div class="flex flex-wrap items-center gap-1">
-                <span class="inline-flex items-center w-fit whitespace-nowrap px-[20px] py-[6px] text-[#EF4444] bg-[#FECACA] rounded-full text-[12px] font-medium hover:bg-red-500 hover:text-white transition cursor-pointer"><i class="fa-solid fa-bug mr-1"></i>${card.labels[0] ? card.labels[0] : ""}</span>
-                <span class="inline-flex items-center w-fit whitespace-nowrap py-[6px] px-[22px] text-[#D97706] bg-[#FDE68A] text-[12px] font-medium rounded-full hover:bg-yellow-600 hover:text-white transition cursor-pointer"><i class="fa-solid fa-life-ring mr-1"></i>${card.labels[1] ? card.labels[1] : ""}</span>
+                <div>${createElement(card.labels)}</div>
             </div>
             <hr>
             <p class="text-[12px] text-[#64748B]">${card.author}</p>
@@ -114,8 +170,7 @@ const displayCard = (info) => {
             <h2 class="font-semibold text-sm text-black">${card.title}</h2>
             <p class="text-[12px] text-[#64748B]">${card.description}p>
             <div class="flex flex-wrap items-center gap-1">
-                <span class="inline-flex items-center w-fit whitespace-nowrap px-[20px] py-[6px] text-[#EF4444] bg-[#FECACA] rounded-full text-[12px] font-medium hover:bg-red-500 hover:text-white transition cursor-pointer"><i class="fa-solid fa-bug mr-1"></i>${card.labels[0] ? card.labels[0]: "" }</span>
-                <span class="inline-flex items-center w-fit whitespace-nowrap py-[6px] px-[22px] text-[#D97706] bg-[#FDE68A] text-[12px] font-medium rounded-full hover:bg-yellow-600 hover:text-white transition cursor-pointer"><i class="fa-solid fa-life-ring mr-1"></i>${card.labels[1] ? card.labels[1]:""}</span>
+                <div>${createElement(card.labels)}</div>
             </div>
             <hr>
             <p class="text-[12px] text-[#64748B]">${card.author}</p>
@@ -126,6 +181,7 @@ const displayCard = (info) => {
         
         cardContainer.append(cards);
     }}
+    manageSpinner(false)
 }
 
 loadcard();
